@@ -1,11 +1,13 @@
 /// <reference types="cypress" />
 
+import { AddAccountPage } from "../support/AddAccountsPage/AddAcountsPage";
 import { HomePage } from "../support/HomePage/HomePage";
-import { LoginPage } from "../support/LoginPage";
+import { LoginPage } from "../support/LoginPage/LoginPage";
 
 
 const loginPage = new LoginPage();
-const homepage = new HomePage();
+const homePage = new HomePage();
+const addAccountPage = new AddAccountPage();
 
 
 beforeEach(()=> {
@@ -16,25 +18,21 @@ beforeEach(()=> {
     loginPage.clickOnLoginButton();
 })
 
-it.only('validade the message returned when try to create an account without a name', ()=>{
-    /* cy.get('.dropdown-toggle').click();
-    cy.get('.dropdown-menu > :nth-child(1) > a').click();
-    cy.get('.btn').click(); */
-    homepage.clickOnAddAccountButton();
+it('validade the message returned when try to create an account without a name', ()=>{
+    homePage.clickOnAddAccountButton();
+    addAccountPage.clickOnSaveButton();
     cy.get('.alert').should("contain.text", "Informe o nome da conta"); 
 })
 
 it('validade the message returned when try to create an account with a name', ()=>{
-    cy.get('.dropdown-toggle').click();
-    cy.get('.dropdown-menu > :nth-child(1) > a').click();
-    cy.get('#nome').type("zaa");
-    cy.get('.btn').click();
+    homePage.clickOnAddAccountButton();
+    addAccountPage.writeAnAccountName("ZZZ");
+    addAccountPage.clickOnSaveButton();
     cy.get('.alert').should("contain.text", "Conta adicionada com sucesso!");    
 })
 
-it('mustShowAllAccountsOnTheSystem', ()=>{
-    cy.get('.dropdown-toggle').click();
-    cy.get('.dropdown-menu > :nth-child(2) > a').click();
+it.only('shoul Show All Accounts On TheSystem', ()=>{
+    homePage.clickOnListButton();
 })
 
 

@@ -1,4 +1,4 @@
-const el = require('./HomePage/elements').ELEMENTS;
+const el = require('./elements').ELEMENTS;
 
 export class LoginPage {
 
