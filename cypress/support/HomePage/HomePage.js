@@ -9,7 +9,6 @@ export class HomePage {
     clickOnListButton(){
         cy.get('.dropdown-toggle').click();
         return cy.get('.dropdown-menu > :nth-child(2) > a').click();
-        
     }
 
 }
