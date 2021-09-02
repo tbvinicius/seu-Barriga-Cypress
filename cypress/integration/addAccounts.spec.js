@@ -1,10 +1,15 @@
 /// <reference types="cypress" />
 
+import { LoginPage } from "../support/LoginPage";
+
+
+const loginPage = new LoginPage();
 
 beforeEach(()=> {
-    cy.visit('https://seubarriga.wcaquino.me/login');
-    cy.get('#email').type("aguia1@aguia.com.br");
-    cy.get('#senha').type("32690305");
+
+    cy.visit('/login');
+    loginPage.writeUserEmail("aguia1@aguia.com.br");
+    loginPage.writeUserPassword("32690305");
     cy.get('.btn').click();
 })
 
@@ -27,5 +32,7 @@ it('mustShowAllAccountsOnTheSystem', ()=>{
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :nth-child(2) > a').click();
 })
+
+
 
 

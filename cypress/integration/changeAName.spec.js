@@ -2,13 +2,13 @@
 
 
 beforeEach(()=> {
-    cy.visit('https://seubarriga.wcaquino.me/login');
+    cy.visit('/login');
     cy.get('#email').type("aguia1@aguia.com.br");
     cy.get('#senha').type("32690305");
     cy.get('.btn').click();
 })
 
-it('validateMessageReturnedWhenChangeTheNameOfAnAccountSuccessfully', ()=>{
+it('validate Message ReturnedWhenChangeTheNameOfAnAccountSuccessfully', ()=>{
     cy.get('.dropdown-toggle').click();
     cy.get('.dropdown-menu > :nth-child(2) > a').click();
     cy.xpath('//*[@id="tabelaContas"]/tbody/tr[1]/td[2]/a[1]/span').click();
