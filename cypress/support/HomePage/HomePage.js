@@ -11,4 +11,9 @@ export class HomePage {
         return cy.get('.dropdown-menu > :nth-child(2) > a').click();
     }
 
+    clickOnCreateAFinancialMovementtButton(){
+        
+        return cy.get(':nth-child(3) > a').click();
+    }
+
 }
