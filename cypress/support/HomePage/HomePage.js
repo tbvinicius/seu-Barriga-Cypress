@@ -12,8 +12,8 @@ export class HomePage {
     }
 
     clickOnCreateAFinancialMovementtButton(){
-        
-        return cy.get(':nth-child(3) > a').click();
+                
+        return cy.get('Criar Movimentação').click();
     }
 
 }

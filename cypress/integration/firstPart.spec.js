@@ -27,7 +27,7 @@ beforeEach(()=> {
 
 describe('First Part', ()=> {
     
-    it.only('validade the message returned when try to create an account without a name', ()=>{
+    it('validade the message returned when try to create an account without a name', ()=>{
         homePage.clickOnAddAccountButton();
         addAccountPage.clickOnSaveButton();
         cy.get('.alert').should("contain.text", "Informe o nome da conta"); 
@@ -54,7 +54,7 @@ describe('First Part', ()=> {
         cy.get('.alert').should("contain.text", "Conta alterada com sucesso!");         
     })
     
-    it.only('validateMessageReturnedWhenDeleteAnAccountSuccessfully', ()=>{
+    it('validateMessageReturnedWhenDeleteAnAccountSuccessfully', ()=>{
 
         homePage.clickOnListButton();
         listAccounts.clickOnDeleteButtonFistLine();
@@ -66,17 +66,30 @@ describe('First Part', ()=> {
 describe('Second Part', ()=>{
 
     
-    it.only('Sould validate The Errors Mandatory Message Of Filds', ()=>{
-        var stringToCompare = "Data da Movimentação é obrigatório" +
-                "Data do pagamento é obrigatório" + "Descrição é obrigatório" +
-                "Interessado é obrigatório" + "Valor é obrigatório" + "Valor deve ser um número";
-
+    it('Sould validate The Errors Mandatory Message Of Filds', ()=>{
+                
         homePage.clickOnCreateAFinancialMovementtButton();
         createFinancialMovementPage.clickOnSaveButton();
+        cy.get('.alert').should("contain.text", "Data da Movimentação é obrigatório");
+        cy.get('.alert').should("contain.text", "Data do pagamento é obrigatório");
+        cy.get('.alert').should("contain.text", "Descrição é obrigatório");
+        cy.get('.alert').should("contain.text", "Interessado é obrigatório");
+        cy.get('.alert').should("contain.text", "Valor é obrigatório");
+        cy.get('.alert').should("contain.text", "Valor deve ser um número");             
+    })
 
-
-
-          
+    it('Sould validate The Error Message Of Value Field Must Be Only Numbers', ()=>{
+                
+        homePage.clickOnCreateAFinancialMovementtButton();
+        
+        createFinancialMovementPage.setDataOFTransaction("03/09/2021");
+        createFinancialMovementPage.setDataOFpayment("29/09/2021");
+        createFinancialMovementPage.setDescription("Pague o aluguel");
+        createFinancialMovementPage.setWhoWants("Madruga");
+        createFinancialMovementPage.setValue("A");
+        createFinancialMovementPage.clickOnSaveButtonToSaveAFinancialMovement();
+       
+        cy.get('.alert').should("contain.text", "Valor deve ser um número");              
     })
 })
 
